@@ -7,11 +7,18 @@ import playermanager
 
 discordsender.sendDiscord(f'`starting in {"debug" if config.debugMode else "production"} mode`', config.discordWebhookUrl)
 
+indexedTimes = []
+
 while True:
 	try:
-		playerToCheck = playermanager.getQueuedPlayer()
-		print(f'checking {playerToCheck}')
-		indexer.indexPlayer(playerToCheck)
-		time.sleep(0.5)
+		curTime = time.time()
+		if len(indexedTimes) < 120:
+			indexedTimes.append(curTime)
+			playerToCheck = playermanager.getQueuedPlayer()
+			print(f'checking {playerToCheck}, checked {len(indexedTimes)} in last minute')
+			indexer.indexPlayer(playerToCheck)
+		else:
+			time.sleep(1)
+		indexedTimes = list(filter(lambda x: (x > curTime - 60), indexedTimes)) 
 	except Exception as e:
 		discordsender.sendDiscord(f'error: {e}', config.discordWebhookUrl)
