@@ -36,6 +36,12 @@ def indexPlayer(playerUuid):
 		print('api failed')
 		return
 
+	playerXp = util.getVal(apiGot, ['player', 'stats', 'Pit', 'profile', 'xp'])
+
+	if playerXp != None:
+		if playerXp >= 610140:
+			return
+
 	playerItems = getItems(apiGot)
 	for curItem in playerItems:
 
