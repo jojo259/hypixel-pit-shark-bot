@@ -7,9 +7,6 @@ def itemSharkable(curItem):
 	itemTier = util.getVal(curItem, ['tag','ExtraAttributes','UpgradeTier'])
 	itemId = util.getVal(curItem, ['id'])
 
-	if itemId != 283:
-		return
-
 	if itemTier == 0 or itemTier == 3:
 		return
 
@@ -27,9 +24,11 @@ def itemSharkable(curItem):
 
 	itemSharkable = False
 
+	swordsLookFor = ['streak_xp', 'melee_heal_on_hit', 'melee_execute', 'melee_lightning']
+
 	for curEnchant in itemPitEnchants:
 		enchantKey = curEnchant.get('Key')
-		if enchantKey == 'streak_xp' or enchantKey == 'melee_heal_on_hit':
+		if itemId == 283 and enchantKey in swordsLookFor:
 			itemSharkable = True
 
 	if not itemSharkable:
