@@ -17,8 +17,6 @@ while True:
 			indexedTimes.append(curTime)
 			playerToCheck = playermanager.getQueuedPlayer()
 			print(f'checking {playerToCheck}, checked {len(indexedTimes)} in last minute')
-			if random.randint(1, 120) == 1:
-				discordsender.sendDiscord(f'checking {playerToCheck}, checked {len(indexedTimes)} in last minute', config.discordWebhookUrl)
 			indexer.indexPlayer(playerToCheck)
 		else:
 			time.sleep(1)
