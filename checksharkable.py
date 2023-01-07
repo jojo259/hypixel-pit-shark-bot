@@ -30,12 +30,14 @@ def itemSharkable(curItem):
 
 	itemSharkable = False
 
-	desiredEnchantsSwords = ['streak_xp', 'melee_heal_on_hit', 'melee_execute', 'melee_lightning']
-	desiredEnchantsPants = ['power_against_crits']
+	desiredEnchantsAny = ['melee_hidden_jewel']
+	desiredEnchantsSwords = desiredEnchantsAny + ['streak_xp', 'melee_heal_on_hit', 'melee_execute', 'melee_lightning', 'melee_gamble', 'melee_damage_when_low', 'melee_damage_vs_diamond']
+	desiredEnchantsPants = desiredEnchantsAny + ['power_against_crits', 'regen_when_hit',]
+	desiredEnchantsBows = desiredEnchantsAny + ['bow_slow']
 
 	for curEnchant in itemPitEnchants:
 		enchantKey = curEnchant.get('Key')
-		if (itemId == 283 and enchantKey in desiredEnchantsSwords) or (itemId == 300 and enchantKey in desiredEnchantsPants):
+		if (itemId == 269 and enchantKey in desiredEnchantsBows) or (itemId == 283 and enchantKey in desiredEnchantsSwords) or (itemId == 300 and enchantKey in desiredEnchantsPants):
 			itemSharkable = True
 
 	if not itemSharkable:
