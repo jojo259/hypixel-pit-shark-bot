@@ -1,3 +1,5 @@
+import random
+
 def keepDictUnder(theDict, underCount):
 	if len(theDict.keys()) > underCount:
 		for curUsername in theDict:
