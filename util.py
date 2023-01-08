@@ -1,10 +1,7 @@
 import random
 
 def keepDictUnder(theDict, underCount):
-	if len(theDict.keys()) > underCount:
-		for curUsername in theDict:
-			if random.randint(1, 2) == 1:
-				theDict.pop(curUsername, None)
+	theDict = dict(list(theDict.items())[underCount:])
 
 def getVal(theDict, thePath):
 	try:
