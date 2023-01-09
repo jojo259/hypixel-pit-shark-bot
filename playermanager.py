@@ -23,7 +23,11 @@ def getNewPlayers():
 	curTime = time.time()
 
 	usernamesApiUrl = f'https://pit-grinder-logic-api-jlrw3.ondigitalocean.app/api/{config.usernamesApiKey}/recentplayers'
-	usernamesApiGot = requests.get(usernamesApiUrl, timeout = 5).json()
+	try:
+		usernamesApiGot = requests.get(usernamesApiUrl, timeout = 5).json()
+	except requests.exceptions.RequestException as e:
+		print(f'usernames api failed: {e}')
+		return
 
 	for curUsername in usernamesApiGot.get('usernames', []):
 		setPlayerLastSeen(curUsername, curTime)
