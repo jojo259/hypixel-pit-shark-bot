@@ -31,7 +31,7 @@ def itemSharkable(curItem):
 	itemSharkable = False
 
 	desiredEnchantsAny = ['melee_hidden_jewel']
-	desiredEnchantsSwords = desiredEnchantsAny + ['streak_xp', 'melee_heal_on_hit', 'melee_execute', 'melee_lightning', 'melee_gamble', 'melee_damage_when_low', 'melee_damage_vs_diamond']
+	desiredEnchantsSwords = desiredEnchantsAny + ['streak_xp', 'melee_heal_on_hit', 'melee_execute', 'melee_lightning', 'melee_gamble', 'melee_damage_when_low', 'melee_damage_vs_diamond', 'melee_literally_p2w']
 	desiredEnchantsPants = desiredEnchantsAny + ['power_against_crits', 'regen_when_hit',]
 	desiredEnchantsBows = desiredEnchantsAny + ['bow_slow']
 
