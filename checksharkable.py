@@ -40,7 +40,6 @@ def itemSharkable(curItem):
 		'melee_execute',
 		'melee_lightning',
 		'melee_gamble',
-		'melee_damage_when_low',
 		'melee_damage_vs_diamond',
 		'melee_literally_p2w'
 	]
