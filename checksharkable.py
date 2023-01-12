@@ -30,17 +30,47 @@ def itemSharkable(curItem):
 
 	itemSharkable = False
 
-	desiredEnchantsAny = ['melee_hidden_jewel']
-	desiredEnchantsSwords = desiredEnchantsAny + ['streak_xp', 'melee_heal_on_hit', 'melee_execute', 'melee_lightning', 'melee_gamble', 'melee_damage_when_low', 'melee_damage_vs_diamond', 'melee_literally_p2w']
-	desiredEnchantsPants = desiredEnchantsAny + ['power_against_crits', 'regen_when_hit',]
-	desiredEnchantsBows = desiredEnchantsAny + ['bow_slow']
+	desiredEnchantsAny = [
+		'melee_hidden_jewel'
+	]
+
+	desiredEnchantsSwords = [
+		'streak_xp',
+		'melee_heal_on_hit',
+		'melee_execute',
+		'melee_lightning',
+		'melee_gamble',
+		'melee_damage_when_low',
+		'melee_damage_vs_diamond',
+		'melee_literally_p2w'
+	]
+
+	desiredEnchantsPants = [
+		'power_against_crits',
+		'regen_when_hit'
+	]
+
+	desiredEnchantsBows = [
+		'bow_slow'
+	]
+
+	desiredEnchantCombinations = [
+		['melee_heal_on_hit', 'melee_damage_when_low']
+	]
 
 	for curEnchant in itemPitEnchants:
 		enchantKey = curEnchant.get('Key')
-		if (itemId == 269 and enchantKey in desiredEnchantsBows) or (itemId == 283 and enchantKey in desiredEnchantsSwords) or (itemId == 300 and enchantKey in desiredEnchantsPants):
+		if (enchantKey in desiredEnchantsAny) or (itemId == 269 and enchantKey in desiredEnchantsBows) or (itemId == 283 and enchantKey in desiredEnchantsSwords) or (itemId == 300 and enchantKey in desiredEnchantsPants):
 			itemSharkable = True
 
-	if not itemSharkable:
-		return
+	itemPitEnchantsKeys = list(map(lambda x: x.get('Key'), itemPitEnchants))
 
-	return True
+	for enchantCombination in desiredEnchantCombinations:
+		allFound = True
+		for curEnchant in enchantCombination:
+			if curEnchant not in itemPitEnchantsKeys:
+				allFound = False
+		if allFound:
+			itemSharkable = True
+
+	return itemSharkable
