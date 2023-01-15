@@ -1,12 +1,14 @@
 import requests
 import config
 
-def sendDiscord(toSend, hookUrl):
+def sendDiscord(toSend, hookUrl, embeds = None):
 	def sendDiscordPart(partToSend):
 		url = hookUrl
 		data = {}
 		data['username'] = 'shark'
 		data['content'] = partToSend
+		if embeds != None:
+			data['embeds'] = embeds
 		requests.post(url, json = data, headers = {'Content-Type': 'application/json'}, timeout = 10)
 
 	toSend = str(toSend)

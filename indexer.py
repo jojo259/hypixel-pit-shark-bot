@@ -3,6 +3,7 @@ import time
 import io
 import urllib
 import json
+import datetime
 
 import nbt
 from nbt.nbt import NBTFile, TAG_Long, TAG_Int, TAG_String, TAG_List, TAG_Compound
@@ -33,7 +34,7 @@ def indexPlayer(playerUuid):
 
 	apiGot = getHypixelApi(apiUrl)
 	if apiGot.get('success') != True:
-		print('api failed')
+		print(f'hypixel api failed')
 		return
 
 	playerXp = util.getVal(apiGot, ['player', 'stats', 'Pit', 'profile', 'xp'])
@@ -50,18 +51,32 @@ def indexPlayer(playerUuid):
 		if itemNonce in alreadySentNonces:
 			continue
 
-		if checksharkable.itemSharkable(curItem) != True:
+		matchedFilters = checksharkable.getItemMatchedSharkableFilters(curItem)
+
+		if len(matchedFilters) == 0:
 			continue
 
 		itemCurLore = curItem.get('tag', {}).get('display', {}).get('Lore', [])
 		itemCurLore.insert(0, f'Owner: {playerUuid}') # change to actual player username from api
 		curItem['tag']['display']['Lore'] = itemCurLore
 
-		print(f'sending item with nonce {itemNonce}')
+		print(f'sending item with nonce {itemNonce} with matched filters {matchedFilters}')
 		alreadySentNonces[itemNonce] = True
 		util.keepDictUnder(alreadySentNonces, 8192)
 		itemImageUrl = 'https://www.jojo.boats/api/itemimage?itemjson=' + urllib.parse.quote_plus(json.dumps(curItem))
-		discordsender.sendDiscord(itemImageUrl, config.discordWebhookUrl)
+		messageEmbeds = [{
+			'type': 'rich',
+			'title': f'Matched filters: `{", ".join(matchedFilters)}`',
+			'description': '',
+			'color': 255,
+			'image': {
+				'url': itemImageUrl,
+				'width': 0,
+				'height': 0
+			},
+			'timestamp': str(datetime.datetime.now())
+		}]
+		discordsender.sendDiscord('Mystic found:', config.discordWebhookUrl, messageEmbeds)
 
 def getItems(playerData):
 	try:
