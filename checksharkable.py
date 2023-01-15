@@ -40,8 +40,11 @@ def itemSharkable(curItem):
 		'melee_execute',
 		'melee_lightning',
 		'melee_gamble',
-		'melee_damage_vs_diamond',
 		'melee_literally_p2w',
+	]
+
+	desiredEnchantsSwordsTokensTwo = [
+		'melee_damage_vs_diamond',
 	]
 
 	desiredEnchantsPants = [
@@ -60,7 +63,16 @@ def itemSharkable(curItem):
 
 	for curEnchant in itemPitEnchants:
 		enchantKey = curEnchant.get('Key')
-		if (enchantKey in desiredEnchantsAny) or (itemId == 269 and enchantKey in desiredEnchantsBows) or (itemId == 283 and enchantKey in desiredEnchantsSwords) or (itemId == 300 and enchantKey in desiredEnchantsPants):
+		enchantLevel = curEnchant.get('Level')
+		if (enchantKey in desiredEnchantsAny):
+			itemSharkable = True
+		if itemId == 269 and enchantKey in desiredEnchantsBows:
+			itemSharkable = True
+		if (itemId == 283 and enchantKey in desiredEnchantsSwords):
+			itemSharkable = True
+		if (itemId == 300 and enchantKey in desiredEnchantsPants):
+			itemSharkable = True
+		if (itemId == 283 and enchantKey in desiredEnchantsSwordsTokensTwo and enchantLevel >= 2):
 			itemSharkable = True
 
 	itemPitEnchantsKeys = list(map(lambda x: x.get('Key'), itemPitEnchants))
