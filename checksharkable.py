@@ -89,7 +89,7 @@ def getItemMatchedSharkableFilters(curItem):
 
 		desiredFilters = {
 			'any': itemTier == 2 and enchantKey in desiredEnchantsAny,
-			'bowAny': itemTier == 2 and itemId == 269 and enchantKey in desiredEnchantsBows,
+			'bowAny': itemTier == 2 and itemId == 261 and enchantKey in desiredEnchantsBows,
 			'swordAny': itemTier == 2 and itemId == 283 and enchantKey in desiredEnchantsSwords,
 			'pantsAny': itemTier == 2 and itemId == 300 and enchantKey in desiredEnchantsPants,
 			'swordsTokensTwoPlus': itemTier == 2 and itemId == 283 and enchantKey in desiredEnchantsSwordsTokensTwo and enchantLevel >= 2,
