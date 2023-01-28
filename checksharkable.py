@@ -32,6 +32,7 @@ desiredEnchantsBows = [
 	'bow_weakness_on_hit',
 	'punch_once_in_a_while',
 	'pin_down',
+	'arrow_true_damage',
 ]
 
 desiredEnchantCombinations = [
