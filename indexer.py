@@ -34,7 +34,7 @@ def indexPlayer(playerUuid):
 
 	apiGot = getHypixelApi(apiUrl)
 	if apiGot.get('success') != True:
-		print(f'hypixel api failed')
+		print(f'hypixel api failed: {str(apiGot)[:128]}')
 		return
 
 	playerXp = util.getVal(apiGot, ['player', 'stats', 'Pit', 'profile', 'xp'])
