@@ -24,11 +24,11 @@ def getHypixelApi(urlToGet):
 		print(f'getHypixelApi {e}')
 	return {'success': False}
 
-def indexPlayer(playerUuid):
-	if len(playerUuid) == 32:
-		apiUrl = f'https://api.hypixel.net/player?key={config.hypixelApiKey}&uuid={playerUuid}'
+def indexPlayer(playerTag):
+	if len(playerTag) == 32:
+		apiUrl = f'https://api.hypixel.net/player?key={config.hypixelApiKey}&uuid={playerTag}'
 	else:
-		apiUrl = f'https://api.hypixel.net/player?key={config.hypixelApiKey}&name={playerUuid}'
+		apiUrl = f'https://api.hypixel.net/player?key={config.hypixelApiKey}&name={playerTag}'
 
 	apiTimer = time.time()
 
@@ -57,7 +57,7 @@ def indexPlayer(playerUuid):
 			continue
 
 		itemCurLore = curItem.get('tag', {}).get('display', {}).get('Lore', [])
-		itemCurLore.insert(0, f'Owner: {playerUuid}') # change to actual player username from api
+		itemCurLore.insert(0, f'Owner: {playerTag}') # change to actual player username from api
 		curItem['tag']['display']['Lore'] = itemCurLore
 
 		print(f'sending item with nonce {itemNonce} with matched filters {matchedFilters}')
@@ -76,7 +76,7 @@ def indexPlayer(playerUuid):
 			},
 			'timestamp': str(datetime.datetime.now())
 		}]
-		discordsender.sendDiscord('Mystic found:', config.discordWebhookUrl, messageEmbeds)
+		discordsender.sendDiscord(f'Mystic found on `{playerTag}`:', config.discordWebhookUrl, messageEmbeds)
 
 def getItems(playerData):
 	try:
